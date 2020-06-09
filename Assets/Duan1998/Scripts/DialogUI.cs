@@ -22,6 +22,10 @@ namespace Duan1998
         private DialogueGraph m_curDialog;
         private bool bChoice;
 
+        [SerializeField]
+        private PlayerInfo m_playerInfo;
+
+        private PlayerInfo m_curDialogInfluence;
         private bool BCurChoice
         {
             get => m_choiceBtns[0].gameObject.activeInHierarchy;
@@ -54,12 +58,14 @@ namespace Duan1998
             }
         }
 
-        public void ShowDialog(DialogueGraph targetScript)
+        public void ShowDialog(DialogueGraph targetScript,PlayerInfo influence=null)
         {
             if (targetScript == null)
                 return;
+            Camera.main.GetComponent<CameraCtrl>().ZoomIn();
             bChoice = false;
             m_curDialog = targetScript;
+            m_curDialogInfluence = influence;
             m_curDialog.Restart();
             StartCoroutine("Play");
 
@@ -99,13 +105,20 @@ namespace Duan1998
             else
             {
                 chat.character.SwitchLightSprite();
+                
                 if (chat.character != chat.leftCharacter)
-                    chat.leftCharacter.SwitchGreySprite();
-                else
-                    chat.rightCharacter.SwitchGreySprite();
+                {
+                    chat.leftCharacter?.SwitchGreySprite();
+                }   
+                else 
+                {
+                    chat.rightCharacter?.SwitchGreySprite();
+                }
+                   
             }
-            m_leftImage.sprite = chat.leftCharacter.m_curCharacterSprite;
-            m_rightImage.sprite = chat.rightCharacter.m_curCharacterSprite;
+            
+            m_leftImage.sprite = chat.leftCharacter?.m_curCharacterSprite;
+            m_rightImage.sprite = chat.rightCharacter?.m_curCharacterSprite;
         }
         private void ShowChoice(Chat chat)
         {
@@ -117,12 +130,20 @@ namespace Duan1998
                 m_choiceTexts[i].text = chat.answers[i].text;
                 int index = i;
                 m_choiceBtns[i].onClick.RemoveAllListeners();
-                m_choiceBtns[i].onClick.AddListener(() => m_curDialog.AnswerQuestion(index));
+                m_choiceBtns[i].onClick.AddListener(() => OnAnswerBtnClick(index,chat.answers[index].influence));
                 m_choiceBtns[i].onClick.AddListener(() => { bNext = true; });
             }
             for (int i = minValue; i < m_choiceBtns.Length; i++)
                 m_choiceBtns[i].gameObject.SetActive(false);
         }
+
+        void OnAnswerBtnClick(int index,PlayerInfo influence)
+        {
+            if (influence != null)
+                m_playerInfo.UpdateValue(influence);
+            m_curDialog.AnswerQuestion(index);
+        }
+
 
         bool bNext;
 
@@ -134,6 +155,9 @@ namespace Duan1998
                 {
                     m_curDialog = null;
                     this.gameObject.SetActive(false);
+                    if (m_curDialogInfluence != null)
+                        m_playerInfo.UpdateValue(m_curDialogInfluence);
+                    Camera.main.GetComponent<CameraCtrl>().ZoomOut();
                     break;
                 }
                 Show(m_curDialog.current);

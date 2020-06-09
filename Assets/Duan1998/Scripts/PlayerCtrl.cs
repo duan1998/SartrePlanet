@@ -10,8 +10,12 @@ namespace Duan1998
 
         private Transform m_bottomPointTrans;
 
-
-
+        [SerializeField]
+        private PlayerInfo m_playerInfo;
+        public PlayerInfo _PlayerInfo
+        {
+            get => m_playerInfo;
+        }
 
         [SerializeField]
         private float m_moveSpeed;
@@ -49,17 +53,24 @@ namespace Duan1998
         private void Update()
         {
             Drop();
-            if (CheckJump())
-                Jump();
-            TurnTo();
-
+            if (GameManager.Instance.IsCanCtrlPlayer)
+            {
+                if (CheckJump())
+                    Jump();
+                TurnTo();
+            }
+  
         }
         private void FixedUpdate()
         {
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-            if (CheckMove(h, v))
-                Move(h, v);
+            if(GameManager.Instance.IsCanCtrlPlayer)
+            {
+                float h = Input.GetAxis("Horizontal");
+                float v = Input.GetAxis("Vertical");
+                if (CheckMove(h, v))
+                    Move(h, v);
+            }
+            
 
         }
 
@@ -135,6 +146,7 @@ namespace Duan1998
             }
 
         }
+
 
     }
 

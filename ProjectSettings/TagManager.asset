@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullet
   - Block
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - 
   - Bullet
   - Ground
-  - 
+  - NCPTrigger
   - 
   - 
   - 
