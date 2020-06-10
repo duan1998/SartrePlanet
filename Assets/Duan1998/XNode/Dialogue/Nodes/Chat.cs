@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XNode;
+using Duan1998;
 
 namespace Dialogue {
     [NodeTint("#CCFFCC")]
@@ -19,6 +20,7 @@ namespace Dialogue {
 
         [System.Serializable] public class Answer {
             public string text;
+            public PlayerInfo influence;
         }
 
         public void AnswerQuestion(int index) {

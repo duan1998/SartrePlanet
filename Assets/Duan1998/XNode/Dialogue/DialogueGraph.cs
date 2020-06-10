@@ -5,7 +5,7 @@ using UnityEngine;
 using XNode;
 
 namespace Dialogue {
-    [CreateAssetMenu(menuName = "Dialogue/Graph", order = 0)]
+    [CreateAssetMenu(menuName = "XNode/Dialogue/Graph", order = 0)]
     public class DialogueGraph : NodeGraph {
         [HideInInspector]
         public Chat current;
