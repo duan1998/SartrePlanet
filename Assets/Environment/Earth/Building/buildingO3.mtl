@@ -1,0 +1,12 @@
+# Blender MTL File: 'untitled.blend'
+# Material Count: 1
+
+newmtl metal.1
+Ns 225.000000
+Ka 0.496032 0.496032 0.496032
+Kd 0.748403 0.748403 0.748403
+Ks 0.503968 0.503968 0.503968
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 3
