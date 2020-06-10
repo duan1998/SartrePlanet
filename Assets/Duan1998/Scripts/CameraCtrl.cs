@@ -20,11 +20,11 @@ namespace Duan1998
 
         private void Update()
         {
-            if(!bZooming)
+            if (!bZooming)
             {
                 transform.position = m_playerTrans.position + m_offset;
             }
-          
+
         }
 
         Vector3 targetPosition;
