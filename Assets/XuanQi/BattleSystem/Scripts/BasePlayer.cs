@@ -10,7 +10,7 @@ namespace Battle
         public int MaxHP;
         public int Hp;
         private bool IsDead = false;
-        public Color[] colors = new Color[4] { Color.red, Color.blue, Color.yellow, Color.black };
+        public Color[] colors = new Color[4] { Color.red, Color.blue, Color.yellow, Color.white };
         public int colorStatus;
 
         public float MaxEnergy;
@@ -55,7 +55,6 @@ namespace Battle
             Time.timeScale = 0;
             PlayerMgr.playerMgr.Dead();
         }
-
         public void Hurt(int num)
         {
             if (DefendedTime > 0)
