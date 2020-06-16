@@ -34,13 +34,9 @@ namespace Battle
         /// </summary>
         private Func<bool> CheckInput;
         BasePlayer player;
-        public int NeededTimes;
-        public GameObject ColorCorona;
-        private Action UpdateMethod;
         private void Awake()
         {
             player = BasePlayer.Player;
-            UpdateMethod = NormalInput;
             for (int i = 0; i < 4; i++)
                 CreateNotes();
             Lay();
@@ -60,7 +56,30 @@ namespace Battle
         }
         private void Update()
         {
-            UpdateMethod();
+            if (Input.GetKey(KeyCode.Space))
+            {
+                if (Input.GetKeyDown(KeyCode.W))
+                { player.WhenColorChange(1); return; }
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    player.WhenColorChange(2); return;
+                }
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    player.WhenColorChange(3); return;
+                }
+                if (Input.GetKeyDown(KeyCode.D))
+                { player.WhenColorChange(0); return; }
+                return;
+            }
+            TempInput = GetInput();
+            if (TempInput != "")
+            {
+                if (CheckInput())
+                    Clear();
+                else
+                { Mistake(); }
+            }
         }
         void CreateNotes()
         {
@@ -107,55 +126,6 @@ namespace Battle
         {
             return player.colorStatus == CurrentArrow.GetComponent<ArrowColor>().ColorIndex&& TempInput == CurrentArrow.name;
         }
-        void NormalInput()
-        {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Time.timeScale = 0.1f;
-                ColorCorona.SetActive(true);
-                UpdateMethod = AfterSpace;
-                return;
-            }
-            TempInput = GetInput();
-            if (TempInput != "")
-            {
-                if (CheckInput())
-                    Clear();
-                else
-                { Mistake(); }
-            }
-        }
-        private void AfterSpace()
-        {
-
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                player.WhenColorChange(3);
-                ReturnNormal(); return;
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                player.WhenColorChange(0);
-                ReturnNormal(); return;
-            }
-
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                player.WhenColorChange(1);
-                ReturnNormal(); return;
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                player.WhenColorChange(2);
-                ReturnNormal(); return;
-            }
-        }
-        void ReturnNormal()
-        {
-            ColorCorona.SetActive(false);
-            UpdateMethod = NormalInput;
-            Time.timeScale = 1;
-        }
         /// <summary>
         /// 排版
         /// </summary>
@@ -174,10 +144,9 @@ namespace Battle
             Destroy(temp);
             if (ArrowList.Count == 0)
             {
-                if (--NeededTimes < 0)
-                    PlayerMgr.playerMgr.ExitQTE();
                 for (int i = 0; i < 4; i++)
                     CreateNotes();
+                timer.CurrentTime = timer.WholeTime;
             }
             Lay();
             CurrentArrow = ArrowList[0];
@@ -203,8 +172,7 @@ namespace Battle
         }
         private void OnDisable()
         {
-            if(timer!=null)
-             timer.gameObject.SetActive( false);
+            timer.gameObject.SetActive( false);
         }
     }
 }

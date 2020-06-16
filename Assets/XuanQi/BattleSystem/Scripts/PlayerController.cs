@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-
 namespace Battle
 {
     public class PlayerController : MonoBehaviour
@@ -23,7 +21,7 @@ namespace Battle
 
         public Timer timer;
         public float SlideRadius;
-        public GameObject ColorCorona;
+
         [Header("超绝三挡的能量")]
         private float XMove, YMove;
         /// <summary>
@@ -32,32 +30,52 @@ namespace Battle
         private bool Skill_1_Limit = true, Skill_2_Limit = true;
         private float[] Energy;
         private float MaxEnergy;
-        private Action UpdateMethod;
         private void OnEnable()
         {
             player = BasePlayer.Player;
             Energy = player.Energy;
             MaxEnergy = player.MaxEnergy;
-            UpdateMethod=NormalInput;
         }
         private void Update()
-        {
-            UpdateMethod();
-        }
-        private void FixedUpdate()
-        {
-            gameObject.transform.position += new Vector3(XMove, YMove, 0) * speed*Time.deltaTime;
-        }
-        private void NormalInput()
         {
             XMove = Input.GetAxis("Horizontal");
             YMove = Input.GetAxis("Vertical");
             if (Input.GetKey(KeyCode.Space))
             {
-                Time.timeScale = 0.02f;
-                ColorCorona.SetActive(true);
-                UpdateMethod = AfterSpace;
-                return;
+                if (XMove != 0)
+                {
+                    if (XMove > 0)
+                        player.WhenColorChange(3);
+                    else
+                        player.WhenColorChange(0);
+                    XMove = 0;
+                    return;
+                }
+                if (YMove != 0)
+                {
+                    if (YMove > 0)
+                        player.WhenColorChange(1);
+                    else
+                        player.WhenColorChange(2);
+                    YMove = 0;
+                    return;
+                }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (CheckEnergy(3))
+                    {
+                        Skill3();
+                        return;
+                    }
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    if (CheckEnergy(4))
+                    {
+                        Skill4();
+                        return;
+                    }
+                }
             }
             if (Input.GetMouseButtonDown(1))
             {
@@ -73,52 +91,9 @@ namespace Battle
                     Skill1();
             }
         }
-        private void AfterSpace()
+        private void FixedUpdate()
         {
-
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                player.WhenColorChange(3);
-                ReturnNormal(); return;
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                player.WhenColorChange(0);
-                ReturnNormal(); return;
-            }
-
-            if (Input.GetKeyDown(KeyCode.W))
-            { 
-                player.WhenColorChange(1);
-                ReturnNormal(); return;
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            { 
-                player.WhenColorChange(2);
-                ReturnNormal(); return;
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (CheckEnergy(3))
-                {
-                    Skill3();
-                    ReturnNormal(); return;
-                }
-            }
-            if (Input.GetMouseButtonDown(1))
-            {
-                if (CheckEnergy(4))
-                {
-                    Skill4();
-                    ReturnNormal(); return;
-                }
-            }
-        }
-        void ReturnNormal()
-        {
-            ColorCorona.SetActive(false);
-            UpdateMethod = NormalInput;
-            Time.timeScale = 1;
+            gameObject.transform.position += new Vector3(XMove, YMove, 0) * speed;
         }
         void Slide()
         {
