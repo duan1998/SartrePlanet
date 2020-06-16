@@ -22,7 +22,18 @@ namespace Battle
             if (color == ColorIndex)
             {
                 slider.value += ChangeValue / MaxEnergy;
+                if (slider.value > 0.9)
+                    EnergyFull();
+                else EnergyNormal();
             }
+        }
+        private void EnergyFull()
+        {
+            GetComponentInChildren<Outline>().enabled = true;
+        }
+        private void EnergyNormal()
+        {
+            GetComponentInChildren<Outline>().enabled = false;
         }
         private void OnDisable()
         {
