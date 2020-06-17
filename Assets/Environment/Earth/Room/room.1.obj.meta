@@ -3,7 +3,152 @@ guid: 02d03d3e8355dad4191d7c11f095d922
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: ce35d5bda96d6374ba86f576a1e54ba5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 52e1b9ca5421b8140b79ec8791c465b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: b18a5eebca450fa46af5815d4357d752, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TV
+    second: {fileID: 2100000, guid: 972a109bafa09fc4c85726b8675e3343, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book.1
+    second: {fileID: 2100000, guid: d514299d609cb484bb9a0a877a71aed0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book.2
+    second: {fileID: 2100000, guid: f29e84dd3b7a240438ebd9726514815c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book.3
+    second: {fileID: 2100000, guid: 57ef9ae92473a59409f75792a9d996c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book.w
+    second: {fileID: 2100000, guid: e25b73b3fce0b5a4396c3a6054e575bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: floor.1
+    second: {fileID: 2100000, guid: f94157f9ae4eb444f9775340d9eda718, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: floor.2
+    second: {fileID: 2100000, guid: 97fc03474743cab42a9d1c6c5afdd7b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass.1
+    second: {fileID: 2100000, guid: d7a1484af0170e34d8f00abb06ec7e30, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass.2
+    second: {fileID: 2100000, guid: a4458119a8a99014695c60c22de66989, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leather
+    second: {fileID: 2100000, guid: bed8eadef78c8fe43b41932c6b45a2a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light.2
+    second: {fileID: 2100000, guid: 6c5c359dfe3509d4aa9aca0b5e478040, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light.3
+    second: {fileID: 2100000, guid: 52b40e3b37b8b2a41b3f01c8a0e7f94f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light.4
+    second: {fileID: 2100000, guid: a667c57a36cdd84428fb4ff8e329a5cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light.5
+    second: {fileID: 2100000, guid: 9973b31822727f84eb27aa72a75feb88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light.window
+    second: {fileID: 2100000, guid: 7a33dcf0f63a1784dba429a88b32ab57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matel.2
+    second: {fileID: 2100000, guid: 13b5b1edcca74e24fa5a0fe0c1f98d8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matel.3
+    second: {fileID: 2100000, guid: 5230c570ca79c5746a0b2959210c14a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matel.4
+    second: {fileID: 2100000, guid: 64b10c4c30f582146908dfe3dda95f96, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: matel.5
+    second: {fileID: 2100000, guid: 730e2a4661418374e85583b81280dd17, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: orange
+    second: {fileID: 2100000, guid: 9a194ce0229c05342a14861d4b2c46ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: paper.1
+    second: {fileID: 2100000, guid: 2c36d10bc0ec89b44a9581bf395e45ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: paper.2
+    second: {fileID: 2100000, guid: 28fb1e1bd487f234880f5260c394d3b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall.2
+    second: {fileID: 2100000, guid: 46c9d9586d1004347b609fb9e8285603, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall.3
+    second: {fileID: 2100000, guid: a2e81d143299a584b8cfbe8ca619e71f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood
+    second: {fileID: 2100000, guid: 62cf8baf517dc464e85a250374ba35a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood.2
+    second: {fileID: 2100000, guid: 31d00879e982a9e4284c967b797d31ed, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -44,7 +189,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1

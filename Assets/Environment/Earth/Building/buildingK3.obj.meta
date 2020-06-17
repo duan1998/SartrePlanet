@@ -3,7 +3,27 @@ guid: 83938ab35627a2142a1dd291b509dec7
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light.1
+    second: {fileID: 2100000, guid: 2927663d034dd00409659e15993e2885, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rooftop.1
+    second: {fileID: 2100000, guid: b3f044103a694dd48ba3b3e0d774d0a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall.5
+    second: {fileID: 2100000, guid: 34cd781090528d14e9d6b661e86a1acf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall.6
+    second: {fileID: 2100000, guid: 2d77a5182606ae945aae27d429e4681c, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
