@@ -13,7 +13,7 @@ namespace Battle
         /// 2 Down
         /// 3 Right
         /// </summary>
-        public GameObject[] Arrows = new GameObject[4],ColorArrows = new GameObject[4];
+        public GameObject[] Arrows = new GameObject[4], ColorArrows = new GameObject[4];
         public Timer timer;
         [Header("按键成功恢复的时间")]
         public float RecoverTime;
@@ -21,7 +21,7 @@ namespace Battle
         /// 当前箭头的列表
         /// </summary>
         private List<GameObject> ArrowList = new List<GameObject>();
-        private string TempInput="";
+        private string TempInput = "";
         private GameObject CurrentArrow;
         [Header("失败时受到的伤害")]
         public int WrongDamage;
@@ -34,9 +34,13 @@ namespace Battle
         /// </summary>
         private Func<bool> CheckInput;
         BasePlayer player;
+        public int NeededTimes;
+        public GameObject ColorCorona;
+        private Action UpdateMethod;
         private void Awake()
         {
             player = BasePlayer.Player;
+            UpdateMethod = NormalInput;
             for (int i = 0; i < 4; i++)
                 CreateNotes();
             Lay();
@@ -48,7 +52,7 @@ namespace Battle
                 GetInput = GrayInput;
                 CheckInput = GrayCheck;
             }
-            else 
+            else
             {
                 GetInput = ColorInput;
                 CheckInput = ColorCheck;
@@ -56,30 +60,7 @@ namespace Battle
         }
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                if (Input.GetKeyDown(KeyCode.W))
-                { player.WhenColorChange(1); return; }
-                if (Input.GetKeyDown(KeyCode.S))
-                {
-                    player.WhenColorChange(2); return;
-                }
-                if (Input.GetKeyDown(KeyCode.A))
-                {
-                    player.WhenColorChange(3); return;
-                }
-                if (Input.GetKeyDown(KeyCode.D))
-                { player.WhenColorChange(0); return; }
-                return;
-            }
-            TempInput = GetInput();
-            if (TempInput != "")
-            {
-                if (CheckInput())
-                    Clear();
-                else
-                { Mistake(); }
-            }
+            UpdateMethod();
         }
         void CreateNotes()
         {
@@ -124,7 +105,56 @@ namespace Battle
         }
         private bool ColorCheck()
         {
-            return player.colorStatus == CurrentArrow.GetComponent<ArrowColor>().ColorIndex&& TempInput == CurrentArrow.name;
+            return player.colorStatus == CurrentArrow.GetComponent<ArrowColor>().ColorIndex && TempInput == CurrentArrow.name;
+        }
+        void NormalInput()
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Time.timeScale = 0.1f;
+                ColorCorona.SetActive(true);
+                UpdateMethod = AfterSpace;
+                return;
+            }
+            TempInput = GetInput();
+            if (TempInput != "")
+            {
+                if (CheckInput())
+                    Clear();
+                else
+                { Mistake(); }
+            }
+        }
+        private void AfterSpace()
+        {
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                player.WhenColorChange(3);
+                ReturnNormal(); return;
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                player.WhenColorChange(0);
+                ReturnNormal(); return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                player.WhenColorChange(1);
+                ReturnNormal(); return;
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                player.WhenColorChange(2);
+                ReturnNormal(); return;
+            }
+        }
+        void ReturnNormal()
+        {
+            ColorCorona.SetActive(false);
+            UpdateMethod = NormalInput;
+            Time.timeScale = 1;
         }
         /// <summary>
         /// 排版
@@ -144,9 +174,10 @@ namespace Battle
             Destroy(temp);
             if (ArrowList.Count == 0)
             {
+                if (--NeededTimes < 0)
+                    PlayerMgr.playerMgr.ExitQTE();
                 for (int i = 0; i < 4; i++)
                     CreateNotes();
-                timer.CurrentTime = timer.WholeTime;
             }
             Lay();
             CurrentArrow = ArrowList[0];
@@ -154,9 +185,9 @@ namespace Battle
         /// <summary>
         /// 失误时调用
         /// </summary>
-        private void Mistake ()
+        private void Mistake()
         {
-            for(int i=0, k= ArrowList.Count;i<k;i++)
+            for (int i = 0, k = ArrowList.Count; i < k; i++)
             {
                 GameObject temp = ArrowList[0];
                 ArrowList.RemoveAt(0);
@@ -172,7 +203,8 @@ namespace Battle
         }
         private void OnDisable()
         {
-            timer.gameObject.SetActive( false);
+            if (timer != null)
+                timer.gameObject.SetActive(false);
         }
     }
 }
