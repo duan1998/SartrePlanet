@@ -3,7 +3,27 @@ guid: 30c247afd7418ce4db56868bcd057449
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bridge.1
+    second: {fileID: 2100000, guid: cc3d8986616695e42b33546a01810b7b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bridge.2
+    second: {fileID: 2100000, guid: 0cafea22195377747a3ee5faf71ac78b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light.1
+    second: {fileID: 2100000, guid: fc5726cfb5b386f458c76bb7957973a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: road.1
+    second: {fileID: 2100000, guid: 5f87673da6d67584984564c3132ed6ed, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
