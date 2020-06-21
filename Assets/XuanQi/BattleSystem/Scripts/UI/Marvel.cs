@@ -10,8 +10,9 @@ namespace Battle
         /// <summary>
         /// 超绝状态当前时间
         /// </summary>
-        public float CurrentTime;
-        public float Speed;
+        private float CurrentTime;
+        private float Speed;
+        public float SpeedNormal, SpeedSlow;
         public Text text;
         /// <summary>
         /// 超绝状态的档位
@@ -22,9 +23,12 @@ namespace Battle
         public string[] CommentText = new string[3];
         public GameObject WholeMarvel;
         private Slider slider;
-        private void Start()
+        private void Awake()
         {
-            text.text = CommentText[BufferNum];
+            Speed = SpeedNormal;
+            CurrentTime = WholeTime;
+            BufferNum = 1;
+            text.text = CommentText[BufferNum - 1];
             slider = GetComponent<Slider>();
         }
         private void Update()
@@ -32,20 +36,23 @@ namespace Battle
                 if (CurrentTime > 0)
                 {
                   slider.value = CurrentTime / WholeTime;
+                  if (slider.value < 0.3)
+                    Speed = SpeedSlow;
                   CurrentTime -= Time.deltaTime * Speed;
                 }
                 else 
                 { 
-                    if(BufferNum>0)
-                    {
-                        BufferNum--;
-                        CurrentTime = WholeTime;
-                        BasePlayer.Player.EnergyAbsorb = EnergyAbsorb[BufferNum];
-                        text.text = CommentText[BufferNum];
-                    }
-                    else
-                        WholeMarvel.SetActive(false);
+                    WholeMarvel.SetActive(false);
                 }
+        }
+        /// <summary>
+        /// 连续升级
+        /// </summary>
+        public void LevelUp ()
+        {
+            BufferNum = BufferNum > 2 ?3:BufferNum + 1;
+            CurrentTime = WholeTime;
+            text.text = CommentText[BufferNum - 1];
         }
     } 
 }
