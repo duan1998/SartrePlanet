@@ -18,7 +18,7 @@ public class MainCamera : MonoBehaviour
         {
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
-            transform.position = transform.position+new Vector3(x, y, -10f);
+            transform.position = transform.position+new Vector3(x, y,0);
             elapsed += Time.deltaTime;
             yield return new WaitForSeconds(0.02f);
         }

@@ -24,7 +24,6 @@ namespace Battle
         /// </summary>
         public float DefendedTime;
 
-        private SpriteRenderer appearance;
 
         public Action<int, float> WhenEnergyChange;
         public Action<int> WhenHpChange;
@@ -32,8 +31,6 @@ namespace Battle
         private void Awake()
         {
             Player = this;
-            appearance = GetComponent<SpriteRenderer>();
-            appearance.color = colors[colorStatus];
             WhenEnergyChange += EnergyChange;
             WhenHpChange += HpChange;
             WhenColorChange += ColorChange;
@@ -81,7 +78,7 @@ namespace Battle
         private void ColorChange(int ColorNum)
         {
             colorStatus = ColorNum;
-            appearance.color = colors[ColorNum];
+            Debug.Log("颜色变为" + ColorNum);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Battle
         public float speed;
 
         public Timer timer;
-        public float SlideRadius;
+        public Vector3 HalfBoxSize;
         public GameObject ColorCorona;
         [Header("超绝三挡的能量")]
         private float XMove, YMove;
@@ -124,10 +124,10 @@ namespace Battle
         {
             player.DefendedTime = 2;
             CostEnergy(DexCost, 1);
-            Collider2D[] bullets = Physics2D.OverlapCircleAll(transform.position, SlideRadius, 1<<8);
+            Collider[] bullets = Physics.OverlapBox(transform.position,HalfBoxSize,Quaternion.AngleAxis(0,Vector3.zero),1<<8);
             if (bullets.Length!=0) 
             {
-                foreach(Collider2D bullet in bullets)
+                foreach(Collider bullet in bullets)
                 {
                     bullet.GetComponent<Bullet>().Absorb();
                     Debug.Log("极限闪避吸收成功");
@@ -168,7 +168,6 @@ namespace Battle
         }
         private void Skill1()
         {
-            
             CostEnergy(MaxEnergy, 1);
             Debug.Log("技能1发动!");
             CleanBullet();
