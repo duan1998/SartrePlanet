@@ -208,11 +208,12 @@ namespace Battle
         /// </summary>
         private void Marvelous()
         {
+            if(Marvel_UI.activeSelf==true)
+            {
+                Marvel marvel = Marvel_UI.GetComponentInChildren<Marvel>();
+                marvel.LevelUp();
+            }
             Marvel_UI.SetActive(true);
-            Marvel marvel = Marvel_UI.GetComponentInChildren<Marvel>();
-            marvel.CurrentTime = marvel.WholeTime;
-            marvel.BufferNum = 2;
-            player.EnergyAbsorb = 2;
         }
     }
 }
