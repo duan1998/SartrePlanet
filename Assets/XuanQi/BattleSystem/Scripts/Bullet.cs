@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
         player.WhenEnergyChange(bulletColor, Damage);
         FadeAway();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Block"))
             Destroy(gameObject);
