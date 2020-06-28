@@ -203,8 +203,7 @@ namespace Battle
         }
         private void OnDisable()
         {
-            if (timer != null)
-                timer.gameObject.SetActive(false);
+            PlayerMgr.playerMgr.ExitQTE();
         }
     }
 }
