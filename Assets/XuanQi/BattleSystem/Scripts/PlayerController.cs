@@ -144,7 +144,7 @@ namespace Battle
                 if (energy >= MaxEnergy)
                     n--;
             }
-            return n < 0;
+            return n <= 0;
         }
         bool CheckEnergy(int n, float value)
         {
